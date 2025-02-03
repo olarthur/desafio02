@@ -2,6 +2,8 @@ package com.devsuperior.desafio02.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -16,6 +18,9 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos;
 
     public Atividade() {
     }
