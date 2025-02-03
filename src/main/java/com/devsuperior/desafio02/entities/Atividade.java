@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,6 +38,13 @@ public class Atividade {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+    }
+
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria, List<Bloco> blocos, Set<Participante> participantes) {
+        this(id, nome, descricao, preco);
+        this.categoria = categoria;
+        this.blocos = blocos;
+        this.participantes = participantes;
     }
 
     public Integer getId() {
@@ -85,5 +93,18 @@ public class Atividade {
 
     public Set<Participante> getParticipantes() {
         return participantes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Atividade atividade = (Atividade) o;
+        return Objects.equals(id, atividade.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
